@@ -8,3 +8,5 @@ packaging==23.1
 pathspec==0.11.1
 platformdirs==3.5.1
 sqlparse==0.4.4
+gunicorn==20.1.0
+whitenoise[brotli]==6.4.0
