@@ -6,5 +6,7 @@
 </head>
 <body>
     {{ context }} <br><br>
+{% load static %}
+<img src="{% static 'color_extractor/test_image_result.png' %}" alt="My image">
 </body>
 </html>
