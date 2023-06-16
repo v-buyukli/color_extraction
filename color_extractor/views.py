@@ -1,6 +1,8 @@
 from django.shortcuts import render
 
+from color_extractor.models import ImageExtraction
+
 
 def index(request):
-    context = "Color Extraction page"
-    return render(request, "index.html", {"context": context})
+    images = ImageExtraction.objects.all()
+    return render(request, "index.html", {"images": images})

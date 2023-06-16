@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 {% load static %}
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
     <title>Color Extraction</title>
 </head>
-
 <body>
-{{ context }} <br><br>
+{% for image in images %}
+{{ image.image_name }} <br>
+{% endfor %}
+<br><br>
 Test image: <br><br>
 <img src="{% static 'images/test_image.jpg' %}" alt="test_image">
 <br><br>
