@@ -1,12 +1,19 @@
 <!DOCTYPE html>
+{% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
     <title>Color Extraction</title>
 </head>
+
 <body>
-    {{ context }} fffff <br><br>
-{% load static %}
-<img src="{% static 'color_extractor/test_image_result.png' %}" alt="My image">
+{{ context }} <br><br>
+Test image: <br><br>
+<img src="{% static 'images/test_image.jpg' %}" alt="test_image">
+<br><br>
+Test result: <br><br>
+<img src="{% static 'images/test_result.png' %}" alt="test_result">
 </body>
 </html>

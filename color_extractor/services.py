@@ -1,5 +1,3 @@
-import os
-
 import extcolors
 import matplotlib.pyplot as plt
 import requests
@@ -20,27 +18,25 @@ def extract_colors(img_url, img_name, tolerance=25, limit=7):
         str(round(el[1] / color_occurrence_sum * 100, 2)) + "%" for el in colors_x[0]
     ]
 
-    print("Colors:")
-    colors = zip(hex_colors, color_percents)
-    for color in colors:
-        print(color[0], "=", color[1])
+    my_circle = plt.Circle(
+        (0, 0), 0.75, edgecolor="black", linewidth=0.5, facecolor="white"
+    )
 
-    my_circle = plt.Circle((0, 0), 0.75,
-                            edgecolor="black", linewidth=0.5, facecolor="white")
     plt.pie(
         color_occurrence,
         labels=color_percents,
         colors=hex_colors,
-        wedgeprops={"edgecolor": "black",
-                     'linewidth': 0.5},
+        wedgeprops={"edgecolor": "black", "linewidth": 0.5},
     )
     p = plt.gcf()
     p.gca().add_artist(my_circle)
+
     plt.legend(hex_colors, loc="center", title="Colors")
     name_result = img_name.replace(".jpg", "_result.png")
-    plt.savefig(f"color_extractor/static/color_extractor/{name_result}")
+    plt.savefig(f"color_extractor/static/images/{name_result}")
 
-    if os.path.exists("test_image.jpg"):
-        os.remove("test_image.jpg")
-    else:
-        print("The file does not exist")
+
+# add to view
+# img_url = "https://file.liga.net/images/general/2020/09/08/20200908171549-5386.jpg?v=1599578314"
+# img_name = "test_image.jpg"
+# extract_colors(img_url, img_name)
