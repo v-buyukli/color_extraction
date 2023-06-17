@@ -1,6 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 
+from color_extractor.forms import ImageExtractionForm
 from color_extractor.models import ImageExtraction
+
+
+def images(request):
+    images_list = ImageExtraction.objects.all()
+    return render(request, "images.html", {"images_list": images_list})
 
 
 def index(request):
@@ -9,6 +16,11 @@ def index(request):
 
 
 def add_image(request):
-    pass
+    form = ImageExtractionForm(request.POST, request.FILES)
 
-# images = ImageExtraction.objects.all()
+    if request.method == "GET":
+        return render(request, "add_image.html", {"form": form})
+    if form.is_valid():
+        form.save()
+        return redirect(reverse(images))
+    return render(request, "add_image.html", {"form": form})

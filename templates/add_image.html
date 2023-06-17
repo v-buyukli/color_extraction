@@ -1,0 +1,5 @@
+<form action="{% url 'add_image_view' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>

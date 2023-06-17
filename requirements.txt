@@ -13,6 +13,7 @@ cycler==0.11.0
 dj-database-url==2.0.0
 Django==4.2.1
 django-environ==0.10.0
+django-storages==1.13.2
 easydev==0.12.1
 extcolors==1.0.0
 fonttools==4.39.4
