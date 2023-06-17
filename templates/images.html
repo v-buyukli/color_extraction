@@ -1,4 +1,17 @@
-{% for image in images_list %}
-    {{ image.image_name }}
-    <br>
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
+    <title>Images</title>
+</head>
+<body>
+List of images: <br><br>
+{% for i in images_list %}
+    image: {{ i.image_name }} <br>
+    <img src="{{ i.user_image.url }}" alt="{{ i.image_name }}">
+    <br><br>
 {% endfor %}
+</body>
+</html>

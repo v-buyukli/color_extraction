@@ -6,7 +6,7 @@ from color_extractor.models import ImageExtraction
 
 
 def images(request):
-    images_list = ImageExtraction.objects.all()
+    images_list = ImageExtraction.objects.all().order_by("-id")
     return render(request, "images.html", {"images_list": images_list})
 
 
@@ -16,7 +16,7 @@ def index(request):
 
 
 def add_image(request):
-    form = ImageExtractionForm(request.POST, request.FILES)
+    form = ImageExtractionForm(request.POST or None, request.FILES or None)
 
     if request.method == "GET":
         return render(request, "add_image.html", {"form": form})
