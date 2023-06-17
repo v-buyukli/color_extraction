@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 
 import dj_database_url
+import environ
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -81,7 +82,22 @@ WSGI_APPLICATION = "color_extraction.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {"default": dj_database_url.config(conn_max_age=600, ssl_require=True)}
+if IS_HEROKU_APP:
+    DATABASES = {"default": dj_database_url.config(conn_max_age=600, ssl_require=True)}
+else:
+    env = environ.Env()
+    environ.Env.read_env(".env")
+
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": env("POSTGRES_NAME"),
+            "USER": env("POSTGRES_USER"),
+            "PASSWORD": env("POSTGRES_PASSWORD"),
+            "HOST": env("POSTGRES_HOST"),
+            "PORT": env("POSTGRES_PORT"),
+        }
+    }
 
 
 # Password validation
