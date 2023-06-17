@@ -4,12 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
-    <title>Color Extraction</title>
+    <title>Images</title>
 </head>
 <body>
-{{ context }}
-<br><br>
-<a href="{% url 'add_image_view' %}">Add image</a> <br>
-<a href="{% url 'images' %}">List of images </a> <br>
+List of images: <br><br>
+{% for i in images_list %}
+    image: {{ i.image_name }} <br>
+    <img src="{{ i.user_image.url }}" alt="{{ i.image_name }}">
+    <br><br>
+{% endfor %}
 </body>
 </html>
