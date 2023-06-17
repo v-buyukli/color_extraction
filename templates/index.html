@@ -7,14 +7,10 @@
     <title>Color Extraction</title>
 </head>
 <body>
+List:  <br>
 {% for image in images %}
 {{ image.image_name }} <br>
 {% endfor %}
 <br><br>
-Test image: <br><br>
-<img src="{% static 'images/test_image.jpg' %}" alt="test_image">
-<br><br>
-Test result: <br><br>
-<img src="{% static 'images/test_result.png' %}" alt="test_result">
 </body>
 </html>
