@@ -7,9 +7,19 @@
     <title>Color Extraction</title>
 </head>
 <body>
-{{ context }}
-<br><br>
-<a href="{% url 'add_image_view' %}">Add image</a> <br>
-<a href="{% url 'images' %}">List of images </a> <br>
+{{  msg }} <br><br>
+{% if user.is_authenticated %}
+    Hello {{ user.username }}!
+    <br>
+    <a href="{% url 'logout_view' %}">logout</a> <br>
+    <br><br>
+    <a href="{% url 'add_image_view' %}">Add image</a> <br>
+    <a href="{% url 'images' %}">List of images</a> <br>
+{% else %}
+    Ви не залогінені(
+    <br><br>
+    <a href="{% url 'login_view' %}">login</a> <br>
+    <a href="{% url 'signup' %}">signup</a> <br>
+{% endif %}
 </body>
 </html>
