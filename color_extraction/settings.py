@@ -102,6 +102,7 @@ else:
         }
     }
 
+    # S3 storage
     AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
     AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
     AWS_STORAGE_BUCKET_NAME = env("AWS_STORAGE_BUCKET_NAME")
@@ -167,3 +168,4 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = "goodmood11111@gmail.com"
 EMAIL_HOST_PASSWORD = "rmateztnasxfgbvr"
+DEFAULT_FROM_EMAIL = "goodmood11111@gmail.com"
