@@ -4,10 +4,19 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.urls import reverse
+from django.http import HttpResponse
 
-from color_extractor.forms import ImageExtractionForm, SignUpForm
+from color_extractor.forms import ImageExtractionForm, SignUpForm, LoginForm
 from color_extractor.models import ImageExtraction
 from color_extractor.tokens import account_activation_token
+
+
+def index(request):
+    context = {
+        "msg": "Home page",
+        "user": request.user,
+    }
+    return render(request, "index.html", context)
 
 
 def signup(request):
@@ -28,14 +37,15 @@ def signup(request):
                 },
             )
             user.email_user("Підтвердьте реєстрацію", message)
-            return redirect("home")
+            return redirect("account_activation_sent")
     else:
         form = SignUpForm()
     return render(request, "signup.html", {"form": form})
 
 
-def index(request):
-    return render(request, "index.html", {"user": request.user})
+def account_activation_sent(request):
+    message = "Please confirm your email address to complete the registration."
+    return render(request, "account_activation_sent.html", {"message": message})
 
 
 def activate(request, uidb64, token):
@@ -53,14 +63,31 @@ def activate(request, uidb64, token):
         return render(request, "account_activation_invalid.html")
 
 
+def account_activation_invalid(request):
+    message = "Account activation invalid."
+    return render(request, "account_activation_invalid.html", {"message": message})
+
+
 def login_view(request):
-    form = "test"
-    user = authenticate(username=form, password=form)
-    if user is not None and user.is_active:
-        login(request, user)
-        return redirect("home")
-    if user is not None and not user.is_active:
-        return render(request, "account_activation_invalid.html")
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password")
+            user = authenticate(username=username, password=password)
+            if user is not None and user.is_active:
+                login(request, user)
+                return redirect("home")
+            else:
+                usernames = User.objects.values_list("username", flat=True)
+                if username in usernames:
+                    msg = "Невірний пароль або ви не підтвердили реєстрацію на пошті"
+                else:
+                    msg = "Спочатку зареєструйтесь будь ласка"
+                return HttpResponse(msg)
+    else:
+        form = LoginForm()
+    return render(request, "login.html", {"form": form})
 
 
 def logout_view(request):
