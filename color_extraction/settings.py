@@ -87,6 +87,11 @@ if IS_HEROKU_APP:
 
     AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
 
+    EMAIL_HOST = os.getenv("EMAIL_HOST")
+    EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+    EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+    DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
+
 else:
     env = environ.Env()
     environ.Env.read_env(".env")
@@ -106,6 +111,11 @@ else:
     AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
     AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
     AWS_STORAGE_BUCKET_NAME = env("AWS_STORAGE_BUCKET_NAME")
+
+    EMAIL_HOST = env("EMAIL_HOST")
+    EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+    EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+    DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
 
 
 # Password validation
@@ -161,11 +171,7 @@ STORAGES = {
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# SMTP settings
+# SMTP general settings
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = "goodmood11111@gmail.com"
-EMAIL_HOST_PASSWORD = "rmateztnasxfgbvr"
-DEFAULT_FROM_EMAIL = "goodmood11111@gmail.com"
+EMAIL_USE_TLS = True
