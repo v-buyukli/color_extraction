@@ -43,3 +43,5 @@ sqlparse==0.4.4
 typing_extensions==4.6.3
 urllib3==1.26.16
 whitenoise==6.4.0
+requests ~= 2.27
+authlib ~= 1.0

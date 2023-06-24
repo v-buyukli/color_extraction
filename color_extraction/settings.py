@@ -84,6 +84,13 @@ WSGI_APPLICATION = "color_extraction.wsgi.application"
 
 if IS_HEROKU_APP:
     DATABASES = {"default": dj_database_url.config(conn_max_age=600, ssl_require=True)}
+
+    AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
+
+    # Load Auth0 application settings into memory
+    AUTH0_DOMAIN = os.getenv("AUTH0_DOMAIN")
+    AUTH0_CLIENT_ID = os.getenv("AUTH0_CLIENT_ID")
+    AUTH0_CLIENT_SECRET = os.getenv("AUTH0_CLIENT_SECRET")
 else:
     env = environ.Env()
     environ.Env.read_env(".env")
@@ -98,6 +105,16 @@ else:
             "PORT": env("POSTGRES_PORT"),
         }
     }
+
+    # S3 storage
+    AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
+    AWS_STORAGE_BUCKET_NAME = env("AWS_STORAGE_BUCKET_NAME")
+
+    # Load Auth0 application settings into memory
+    AUTH0_DOMAIN = env("AUTH0_DOMAIN")
+    AUTH0_CLIENT_ID = env("AUTH0_CLIENT_ID")
+    AUTH0_CLIENT_SECRET = env("AUTH0_CLIENT_SECRET")
 
 
 # Password validation
@@ -152,5 +169,3 @@ STORAGES = {
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
