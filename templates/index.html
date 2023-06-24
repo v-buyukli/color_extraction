@@ -10,6 +10,9 @@
     {% if session %}
     <h1>Welcome {{session.userinfo.name}}!</h1>
     <p><a href="{% url 'logout' %}">Logout</a></p>
+        Your photo: <br>
+        <img src="{{ session.userinfo.picture }}" alt="test2"> <br><br>
+        <a href="{% url 'add_image_view' %}">Change photo</a> <br><br>
     <div><pre>{{pretty}}</pre></div>
     {% else %}
     <h1>Welcome Guest</h1>
