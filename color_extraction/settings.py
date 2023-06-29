@@ -87,11 +87,11 @@ if IS_HEROKU_APP:
 
     AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
 
-    EMAIL_HOST = os.getenv("EMAIL_HOST")
-    EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
-    EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
-    DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
-
+    # Load Auth0 application settings into memory
+    AUTH0_DOMAIN = os.getenv("AUTH0_DOMAIN")
+    AUTH0_CLIENT_ID = os.getenv("AUTH0_CLIENT_ID")
+    AUTH0_CLIENT_SECRET = os.getenv("AUTH0_CLIENT_SECRET")
+    AUTH0_TOKEN = os.getenv("AUTH0_TOKEN")
 else:
     env = environ.Env()
     environ.Env.read_env(".env")
@@ -112,10 +112,11 @@ else:
     AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
     AWS_STORAGE_BUCKET_NAME = env("AWS_STORAGE_BUCKET_NAME")
 
-    EMAIL_HOST = env("EMAIL_HOST")
-    EMAIL_HOST_USER = env("EMAIL_HOST_USER")
-    EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
-    DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
+    # Load Auth0 application settings into memory
+    AUTH0_DOMAIN = env("AUTH0_DOMAIN")
+    AUTH0_CLIENT_ID = env("AUTH0_CLIENT_ID")
+    AUTH0_CLIENT_SECRET = env("AUTH0_CLIENT_SECRET")
+    AUTH0_TOKEN = env("AUTH0_TOKEN")
 
 
 # Password validation
@@ -170,8 +171,3 @@ STORAGES = {
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-# SMTP general settings
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
