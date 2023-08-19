@@ -1,11 +1,11 @@
 import json
+from urllib.parse import quote_plus, urlencode
 
 import requests
 from authlib.integrations.django_client import OAuth
 from django.conf import settings
 from django.shortcuts import redirect, render
 from django.urls import reverse
-from urllib.parse import quote_plus, urlencode
 
 from color_extractor.forms import ImageExtractionForm
 from color_extractor.models import ImageExtraction
@@ -74,9 +74,7 @@ def add_image(request):
         return render(request, "add_image.html", {"form": form})
     if form.is_valid():
         form.save()
-        new_picture = (
-            ImageExtraction.objects.last().user_image.url
-        )
+        new_picture = ImageExtraction.objects.last().user_image.url
         update_payload = {"picture": new_picture}
         user_id = request.session.get("user")["userinfo"]["sub"]
         api_url = f"https://{settings.AUTH0_DOMAIN}/api/v2/users/{user_id}"
@@ -84,9 +82,11 @@ def add_image(request):
             "Authorization": f"Bearer {settings.AUTH0_TOKEN}",
             "Content-Type": "application/json",
         }
-        response = requests.patch(api_url, headers=headers, data=json.dumps(update_payload))
+        response = requests.patch(
+            api_url, headers=headers, data=json.dumps(update_payload)
+        )
         if response.status_code == 200:
-            request.session.get("user")['userinfo']['picture'] = new_picture
+            request.session.get("user")["userinfo"]["picture"] = new_picture
         login(request)
         return redirect(reverse(index))
     return render(request, "add_image.html", {"form": form})
