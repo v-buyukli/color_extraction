@@ -3,20 +3,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Color Extraction</title>
+    <link rel="stylesheet" href="{% static 'color_extractor/styles.css' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
 </head>
 <body>
-    {% if session %}
-    <h1>Welcome {{session.userinfo.name}}!</h1>
-    <p><a href="{% url 'logout' %}">Logout</a></p>
-        Your photo: <br>
-        <img src="{{ session.userinfo.picture }}" alt="test2"> <br><br>
-        <a href="{% url 'add_image_view' %}">Change photo</a> <br><br>
-    <div><pre>{{pretty}}</pre></div>
-    {% else %}
-    <h1>Welcome Guest</h1>
-    <p><a href="{% url 'login' %}">Login</a></p>
-    {% endif %}
-  </body>
+    <header>
+    <h1><span class="site-name">Color Extraction</span>: <span class="slogan">Unveil the Palette Within Your Photos</span></h1>
+    </header>
+
+    <main>
+        <section class="description">
+            <h2>Image Color Extraction</h2>
+            <p><b>Color Extraction</b> is your gateway to a world of creativity. Upload an image, and watch as our algorithm uncovers the seven dominant colors within it. The result? A captivating pie chart that breaks down each color's contribution in percentage.</p>
+        </section>
+
+        <section class="examples">
+            <h2>Explore Our Examples</h2>
+            <p>See how <b>Color Extraction</b> can transform ordinary photos into captivating color palettes:</p>
+        </section>
+
+        <section class="example-photos">
+            <div class="photo">
+                <img src="{% static 'images/ex1.jpeg' %}" alt="ex1">
+            </div>
+            <div class="photo">
+                <img src="{% static 'images/ex1_result.png' %}" alt="ex1_result">
+            </div>
+            <div class="photo">
+                <img src="{% static 'images/ex2.jpg' %}" alt="ex2">
+            </div>
+            <div class="photo">
+                <img src="{% static 'images/ex2_result.png' %}" alt="ex2_result">
+            </div>
+            <div class="photo">
+                <img src="{% static 'images/ex3.jpg' %}" alt="ex3">
+            </div>
+            <div class="photo">
+                <img src="{% static 'images/ex3_result.png' %}" alt="ex3_result">
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p class="contact-info">&copy; 2023 Color Extraction | Contact: <a class="contact-link" href="mailto:info@colorextraction.com">info@colorextraction.com</a></p>
+    </footer>
+</body>
 </html>
