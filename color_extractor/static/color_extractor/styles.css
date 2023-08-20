@@ -61,14 +61,24 @@ footer {
     color: white;
 }
 
-.site-name, .slogan {
+/* Стили для названия */
+.site-name {
     font-weight: bold;
+    color: white; /* Изменяем цвет */
+    font-size: 2rem; /* Изменяем размер */
+    text-decoration: none; /* Убираем подчеркивание */
 }
 
+.site-name:hover {
+    color: #FF5733; /* Изменяем цвет при наведении */
+}
+
+/* Стили для описания */
 .slogan {
     font-weight: bold;
 }
 
+/* Стили для контактной информации в футере */
 .contact-info {
     font-size: 0.85rem;
     color: #bbb;
