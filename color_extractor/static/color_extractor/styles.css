@@ -62,7 +62,7 @@ footer {
     color: white;
 }
 
-.site-name {
+.site-name, .slogan {
     font-weight: bold;
 }
 
@@ -83,4 +83,17 @@ footer {
 
 .contact-link:hover {
     color: #FF5733;
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+    header .slogan {
+        font-size: 1rem;
+    }
+    .photo {
+        max-width: 100%;
+        height: auto;
+    }
 }
