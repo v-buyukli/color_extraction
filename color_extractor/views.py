@@ -24,16 +24,20 @@ oauth.register(
 )
 
 
+# def index(request):
+#     s = request.session.get("user")
+#     return render(
+#         request,
+#         "index.html",
+#         context={
+#             "session": s,
+#             "pretty": json.dumps(s, indent=4),
+#         },
+#     )
+
+
 def index(request):
-    s = request.session.get("user")
-    return render(
-        request,
-        "index.html",
-        context={
-            "session": s,
-            "pretty": json.dumps(s, indent=4),
-        },
-    )
+    return render(request, "index.html")
 
 
 def callback(request):
@@ -74,19 +78,6 @@ def add_image(request):
         return render(request, "add_image.html", {"form": form})
     if form.is_valid():
         form.save()
-        new_picture = ImageExtraction.objects.last().user_image.url
-        update_payload = {"picture": new_picture}
-        user_id = request.session.get("user")["userinfo"]["sub"]
-        api_url = f"https://{settings.AUTH0_DOMAIN}/api/v2/users/{user_id}"
-        headers = {
-            "Authorization": f"Bearer {settings.AUTH0_TOKEN}",
-            "Content-Type": "application/json",
-        }
-        response = requests.patch(
-            api_url, headers=headers, data=json.dumps(update_payload)
-        )
-        if response.status_code == 200:
-            request.session.get("user")["userinfo"]["picture"] = new_picture
-        login(request)
-        return redirect(reverse(index))
+        ImageExtraction.objects.last().user_image.url
+        return redirect(reverse(images))
     return render(request, "add_image.html", {"form": form})

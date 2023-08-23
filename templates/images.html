@@ -3,15 +3,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Extraction | Images</title>
+    <link rel="stylesheet" href="{% static 'color_extractor/styles.css' %}">
     <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
-    <title>Images</title>
 </head>
 <body>
-List of images: <br><br>
-{% for i in images_list %}
-    image: {{ i.image_name }} <br>
-    <img src="{{ i.user_image.url }}" alt="{{ i.image_name }}">
-    <br><br>
-{% endfor %}
+    <div class="content-wrapper">
+        <main>
+            <h2 class="photo-subtitle">Your Images</h2>
+            <section class="example-photos">
+                {% for i in images_list %}
+                    <div class="photo">
+                        <img src="{{ i.user_image.url }}" alt="{{ i.image_name }}" style="max-width: 100%;">
+                    </div>
+                {% endfor %}
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p class="contact-info">&copy; 2023 Color Extraction | Contact: <a class="contact-link" href="mailto:info@colorextraction.com">info@colorextraction.com</a></p>
+    </footer>
 </body>
 </html>
