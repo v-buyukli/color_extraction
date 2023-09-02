@@ -1,5 +1,6 @@
-import color_extractor.models
 from django.db import migrations, models
+
+import color_extractor.services
 
 
 class Migration(migrations.Migration):
@@ -23,7 +24,7 @@ class Migration(migrations.Migration):
             name="user_image",
             field=models.ImageField(
                 null=True,
-                upload_to=color_extractor.models.upload_user_image,
+                upload_to=color_extractor.services.upload_user_image,
                 verbose_name="Upload an image",
             ),
         ),

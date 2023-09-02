@@ -1,10 +1,6 @@
-import uuid
-
 from django.db import models
 
-
-def upload_user_image(instance, filename):
-    return f"color_extraction/{uuid.uuid4()}/{filename}"
+from color_extractor.services import upload_user_image
 
 
 class ImageExtraction(models.Model):

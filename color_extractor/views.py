@@ -1,12 +1,15 @@
+from io import BytesIO
 from urllib.parse import quote_plus, urlencode
 
 from authlib.integrations.django_client import OAuth
 from django.conf import settings
+from django.core.files import File
 from django.shortcuts import redirect, render
 from django.urls import reverse
 
 from color_extractor.forms import ImageExtractionForm
 from color_extractor.models import ImageExtraction
+from color_extractor.services import extract_colors
 
 
 oauth = OAuth()
@@ -56,14 +59,26 @@ def images(request):
     s = request.session.get("user")
     if s:
         sub = s["userinfo"]["sub"]
+        user_email = s["userinfo"]["email"]
 
     if request.method == "POST":
         form = ImageExtractionForm(request.POST, request.FILES)
         if form.is_valid():
+            uploaded_image = form.cleaned_data["user_image"].read()
+
             instance = form.save(commit=False)
-            instance.user_email = s["userinfo"]["email"]
+            instance.user_email = user_email
             instance.image_name = sub
             instance.save()
+
+            result_image_data = extract_colors(uploaded_image)
+            image_extraction = ImageExtraction(
+                user_email=user_email,
+                image_name=sub,
+            )
+            result_image_file = File(BytesIO(result_image_data))
+            image_extraction.user_image.save("result.png", result_image_file)
+            image_extraction.save()
             return redirect(reverse("images"))
     else:
         form = ImageExtractionForm()
