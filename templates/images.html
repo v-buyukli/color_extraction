@@ -25,6 +25,12 @@
                 {% for i in images_list %}
                     <div class="photo">
                         <img src="{{ i.user_image.url }}" alt="{{ i.image_name }}" style="max-width: 100%;">
+                        {% if forloop.counter|divisibleby:2 == 0 %}
+                        <form action="{% url 'delete_image' i.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="delete-button">Delete</button>
+                        </form>
+                        {% endif %}
                     </div>
                 {% endfor %}
             </section>

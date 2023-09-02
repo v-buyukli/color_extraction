@@ -96,3 +96,14 @@ def images(request):
             "form": form,
         },
     )
+
+
+def delete_image(request, image_id):
+    try:
+        image = ImageExtraction.objects.get(id=image_id)
+        previous_image = ImageExtraction.objects.filter(id__lt=image_id).last()
+        image.delete()
+        previous_image.delete()
+    except ImageExtraction.DoesNotExist:
+        pass
+    return redirect("images")
