@@ -1,7 +1,5 @@
-import json
 from urllib.parse import quote_plus, urlencode
 
-import requests
 from authlib.integrations.django_client import OAuth
 from django.conf import settings
 from django.shortcuts import redirect, render
@@ -24,18 +22,6 @@ oauth.register(
 )
 
 
-# def index(request):
-#     s = request.session.get("user")
-#     return render(
-#         request,
-#         "index.html",
-#         context={
-#             "session": s,
-#             "pretty": json.dumps(s, indent=4),
-#         },
-#     )
-
-
 def index(request):
     return render(request, "index.html")
 
@@ -43,7 +29,7 @@ def index(request):
 def callback(request):
     token = oauth.auth0.authorize_access_token(request)
     request.session["user"] = token
-    return redirect(request.build_absolute_uri(reverse("index")))
+    return redirect(request.build_absolute_uri(reverse("images")))
 
 
 def login(request):
@@ -67,17 +53,31 @@ def logout(request):
 
 
 def images(request):
-    images_list = ImageExtraction.objects.all().order_by("-id")
-    return render(request, "images.html", {"images_list": images_list})
+    s = request.session.get("user")
+    if s:
+        sub = s["userinfo"]["sub"]
 
+    if request.method == "POST":
+        form = ImageExtractionForm(request.POST, request.FILES)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.user_email = s["userinfo"]["email"]
+            instance.image_name = sub
+            instance.save()
+            return redirect(reverse("images"))
+    else:
+        form = ImageExtractionForm()
 
-def add_image(request):
-    form = ImageExtractionForm(request.POST or None, request.FILES or None)
+    images_list = []
+    if s:
+        images_list = ImageExtraction.objects.filter(image_name=sub).order_by("-id")
 
-    if request.method == "GET":
-        return render(request, "add_image.html", {"form": form})
-    if form.is_valid():
-        form.save()
-        ImageExtraction.objects.last().user_image.url
-        return redirect(reverse(images))
-    return render(request, "add_image.html", {"form": form})
+    return render(
+        request,
+        "images.html",
+        context={
+            "session": s,
+            "images_list": images_list,
+            "form": form,
+        },
+    )
