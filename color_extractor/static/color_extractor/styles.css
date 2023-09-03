@@ -26,11 +26,6 @@ header h1 {
     margin-bottom: 0.5rem;
 }
 
-header .slogan {
-    font-size: 2rem;
-    font-style: italic;
-}
-
 main {
     max-width: 1200px;
     margin: 0 auto;
@@ -75,19 +70,18 @@ footer {
     color: white;
     font-size: 2rem;
     text-decoration: none;
+    font-style: italic;
+    border: 10px solid gray;
+    padding: 5px;
 }
 
 .site-name:hover {
     color: #FF5733;
 }
 
-.slogan {
-    font-weight: bold;
-}
-
 .contact-info {
     font-size: 0.85rem;
-    color: #bbb;
+    color: white;
 }
 
 .contact-link {
@@ -98,11 +92,4 @@ footer {
 
 .contact-link:hover {
     color: #FF5733;
-}
-
-.photo-subtitle {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
-    text-align: center;
 }

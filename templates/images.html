@@ -9,12 +9,15 @@
     <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
 </head>
 <body>
+    <header>
+        <h1><a class="site-name" href="/">Color Extraction</a> <i>Your Images</i></h1>
+    </header>
+
     <div class="content-wrapper">
         <main>
             {% if session %}
             <p><a href="{% url 'logout' %}">Logout</a></p>
 
-            <h2 class="photo-subtitle">Your Images</h2>
             <form action="{% url 'images' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.as_p }}
@@ -45,7 +48,7 @@
     </div>
 
     <footer>
-        <p class="contact-info">&copy; 2023 Color Extraction | Contact: <a class="contact-link" href="mailto:colorextraction@gmail.com">colorextraction@gmail.com</a></p>
+        <p class="contact-info">&copy; 2023 Color Extraction | &#x1F4E8; <a class="contact-link" href="mailto:colorextraction@gmail.com">colorextraction@gmail.com</a></p>
     </footer>
 </body>
 </html>
