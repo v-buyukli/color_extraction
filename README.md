@@ -9,9 +9,9 @@ The result? A captivating pie chart that breaks down the contribution of each pr
 
 - **Examples**  
 
-![ex1](https://color-extraction.herokuapp.com/static/images/ex1_result.262ea6ab27ff.png)  
-![ex2](https://color-extraction.herokuapp.com/static/images/ex2_result.cd5f07f21d54.png)  
-![ex3](https://color-extraction.herokuapp.com/static/images/ex3_result.0462ca695549.png)  
+![ex1](https://github.com/v-buyukli/color_extraction/blob/main/color_extractor/static/images/ex1_result.png?raw=true)  
+![ex2](https://github.com/v-buyukli/color_extraction/blob/main/color_extractor/static/images/ex2_result.png?raw=true)  
+![ex3](https://github.com/v-buyukli/color_extraction/blob/main/color_extractor/static/images/ex3_result.png?raw=true)  
 
 
 - **Link**: https://color-extraction.herokuapp.com
