@@ -28,9 +28,9 @@ def extract_colors(image_data, tolerance=25, limit=7):
             for el in colors_x[0][:limit]
         ]
 
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(figsize=(10, 10))
         my_circle = plt.Circle(
-            (0, 0), 0.75, edgecolor="black", linewidth=0.5, facecolor="white"
+            (0, 0), 0.7, edgecolor="black", linewidth=1, facecolor="white"
         )
 
         ax.pie(
@@ -38,9 +38,10 @@ def extract_colors(image_data, tolerance=25, limit=7):
             labels=color_percents,
             colors=hex_colors,
             wedgeprops={"edgecolor": "black", "linewidth": 0.5},
+            textprops={'fontsize': 15}
         )
         ax.add_artist(my_circle)
-        ax.legend(hex_colors, loc="center", title="Colors")
+        ax.legend(hex_colors, loc="center", title="Colors", fontsize=15, title_fontsize=15)
 
         with BytesIO() as result_image_buffer:
             plt.savefig(result_image_buffer, format="png")
