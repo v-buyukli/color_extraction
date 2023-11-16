@@ -29,19 +29,31 @@ def extract_colors(image_data, tolerance=25, limit=7):
         ]
 
         fig, ax = plt.subplots(figsize=(10, 10))
+        fig.patch.set_facecolor("black")
+
         my_circle = plt.Circle(
-            (0, 0), 0.7, edgecolor="black", linewidth=1, facecolor="white"
+            (0, 0), 0.7, edgecolor="white", linewidth=2, facecolor="black"
         )
 
         ax.pie(
             color_occurrence,
             labels=color_percents,
             colors=hex_colors,
-            wedgeprops={"edgecolor": "black", "linewidth": 0.5},
-            textprops={'fontsize': 15}
+            wedgeprops={"edgecolor": "white", "linewidth": 2},
+            textprops={"fontsize": 13, "color": "white", "weight": "bold"},
         )
         ax.add_artist(my_circle)
-        ax.legend(hex_colors, loc="center", title="Colors", fontsize=15, title_fontsize=15)
+
+        legend = ax.legend(
+            hex_colors,
+            loc="center",
+            title="$\\bf{Colors}$",
+            fontsize=14,
+            title_fontsize=15,
+            labelcolor="white",
+        )
+        legend.get_title().set_color("white")
+        legend.get_frame().set_facecolor("gray")
 
         with BytesIO() as result_image_buffer:
             plt.savefig(result_image_buffer, format="png")
