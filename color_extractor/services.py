@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from colormap import rgb2hex
 
 
-def upload_user_image(instance, filename):
+def upload_user_image(instance, filename):   # noqa
     return f"color_extraction/{uuid.uuid4()}/{filename}"
 
 

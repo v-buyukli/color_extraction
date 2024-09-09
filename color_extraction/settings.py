@@ -2,14 +2,14 @@ import os
 from pathlib import Path
 
 import dj_database_url
-import environ
+import environ   # noqa
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = "django-insecure-yfnciz!l8h-me5qe_*r!r)tb$*m31a@*72%2xb3&s+11)61^q@"
 
-IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
+IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ   # noqa E713
 
 if not IS_HEROKU_APP:
     DEBUG = True
@@ -76,13 +76,17 @@ else:
 
     DATABASES = {
         "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        },
+        "users": {
             "ENGINE": "django.db.backends.postgresql",
             "NAME": env("POSTGRES_NAME"),
             "USER": env("POSTGRES_USER"),
             "PASSWORD": env("POSTGRES_PASSWORD"),
             "HOST": env("POSTGRES_HOST"),
             "PORT": env("POSTGRES_PORT"),
-        }
+        },
     }
 
     AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")

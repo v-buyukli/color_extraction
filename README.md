@@ -14,7 +14,14 @@ The result? A captivating pie chart that breaks down the contribution of each pr
 ![ex3](https://github.com/v-buyukli/color_extraction/blob/main/color_extractor/static/images/ex3_result.png?raw=true)  
 
 
-- **Link**: https://color-extraction.herokuapp.com
+- **Link**: https://color-extraction.herokuapp.com (subscription not paid)
+
+
+- **Run the application locally**:  
+  - create and activate virtual environment 
+  - fill env variables (`.env`)
+  - `pip install -r requirements.txt`
+  - `python manage.py runserver`
 
 
 - **Built With**: Django, Postgres, Heroku, Auth0, S3
