@@ -5,9 +5,12 @@ import dj_database_url
 import environ   # noqa
 
 
+env = environ.Env()
+environ.Env.read_env(".env")
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "django-insecure-yfnciz!l8h-me5qe_*r!r)tb$*m31a@*72%2xb3&s+11)61^q@"
+SECRET_KEY = env("SECRET_KEY")
 
 IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ   # noqa E713
 
@@ -71,9 +74,6 @@ if IS_HEROKU_APP:
     AUTH0_CLIENT_SECRET = os.getenv("AUTH0_CLIENT_SECRET")
     AUTH0_TOKEN = os.getenv("AUTH0_TOKEN")
 else:
-    env = environ.Env()
-    environ.Env.read_env(".env")
-
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",

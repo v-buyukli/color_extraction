@@ -21,6 +21,7 @@ The result? A captivating pie chart that breaks down the contribution of each pr
   - create and activate virtual environment 
   - fill env variables (`.env`)
   - `pip install -r requirements.txt`
+  - `python manage.py migrate`
   - `python manage.py runserver`
 
 
