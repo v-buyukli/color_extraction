@@ -25,4 +25,7 @@ The result? A captivating pie chart that breaks down the contribution of each pr
   - `python manage.py runserver`
 
 
+- **Note**: this repository is used for demonstration and testing purposes only.
+
+
 - **Built With**: Django, Postgres, Heroku, Auth0, S3
